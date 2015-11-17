@@ -167,13 +167,21 @@ public class GUIMutex
 	}
 	
 	public boolean syncIsSelected(){
-		return bSync.isEnabled();
+		return bSync.isSelected();
 	}
 	
+	public void setTransmittedText(String transmittedText) {
+		lblTrans.setText(transmittedText);
+	}
+	
+	public void setReceivedText(String receivedText) {
+		lblRec.setText(receivedText);
+	}
 	private class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnRun){
+				System.out.println(syncIsSelected());
 				controller.startRW(txtTrans.getText(), syncIsSelected());
 			}else if(e.getSource() == btnClear){
 				txtTrans.setText("");
@@ -187,4 +195,5 @@ public class GUIMutex
 			}
 		}
 	}
+
 }

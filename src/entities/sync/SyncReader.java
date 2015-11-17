@@ -1,4 +1,4 @@
-package readerwriter;
+package entities.sync;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -6,12 +6,12 @@ import java.util.Random;
 
 import controller.Controller;
 
-public class Reader implements Runnable, Observer{
-	private CharacterBuffer cb;
+public class SyncReader implements Runnable, Observer{
+	private SyncCharacterBuffer cb;
 	private Controller controller;
 	private Random rand;
 
-	public Reader(CharacterBuffer cb, Controller controller) {
+	public SyncReader(SyncCharacterBuffer cb, Controller controller) {
 		this.cb = cb;
 		cb.addObserver(this);
 		this.controller = controller;
@@ -39,7 +39,6 @@ public class Reader implements Runnable, Observer{
 				}
 			}
 			char c = cb.get();
-			System.out.println("Reader" + c);
 			if(c != '\0'){				
 				controller.updateReader(c);
 			}else{

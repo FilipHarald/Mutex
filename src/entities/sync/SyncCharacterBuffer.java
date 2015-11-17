@@ -1,13 +1,14 @@
-package readerwriter;
+package entities.sync;
 
 import java.util.Observable;
 
-public class CharacterBuffer extends Observable {
+import entities.async.CharacterBuffer;
+
+public class SyncCharacterBuffer extends Observable  {
 	private char c;
 	private boolean hasBeenRead = true;
 	
 	public void put(char c) {
-		System.out.println("cb put " + c);
 		this.c = c;
 		hasBeenRead = false;
 		setChanged();
@@ -19,7 +20,6 @@ public class CharacterBuffer extends Observable {
 	}
 	
 	public char get(){
-		System.out.println("cb get " + c);
 		hasBeenRead = true;
 		setChanged();
 		notifyObservers();

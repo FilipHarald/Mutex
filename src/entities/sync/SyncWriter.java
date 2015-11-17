@@ -1,4 +1,4 @@
-package readerwriter;
+package entities.sync;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -6,13 +6,13 @@ import java.util.Random;
 
 import controller.Controller;
 
-public class Writer implements Runnable, Observer{
+public class SyncWriter implements Runnable, Observer{
 	private char[] chars;
-	private CharacterBuffer cb;
+	private SyncCharacterBuffer cb;
 	private Controller controller;
 	private Random rand;
 	
-	public Writer(char[] chars, CharacterBuffer cb, Controller controller) {
+	public SyncWriter(char[] chars, SyncCharacterBuffer cb, Controller controller) {
 		this.chars = chars;
 		this.cb = cb;
 		cb.addObserver(this);
@@ -45,7 +45,6 @@ public class Writer implements Runnable, Observer{
 			}
 			ifHasNotBeenRead();
 			controller.updateWriterLogger("Writing " + c);
-			System.out.println("Writer" + c);
 			cb.put(c);
 		}
 		ifHasNotBeenRead();

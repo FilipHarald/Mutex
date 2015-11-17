@@ -2,9 +2,8 @@ package controller;
 
 import java.util.LinkedList;
 
-import readerwriter.CharacterBuffer;
-import readerwriter.Reader;
-import readerwriter.Writer;
+import entities.async.*;
+import entities.sync.*;
 import gui.GUIMutex;
 
 public class Controller {
@@ -18,13 +17,19 @@ public class Controller {
 		this.guiFrame = guiFrame;
 	}
 	
-	public void startRW(String text, boolean syncronous){
-		//TODO sync/async
-		CharacterBuffer cb = new CharacterBuffer();
+	public void startRW(String text, boolean synchronous){
 		this.chars = text.toCharArray();
 		readCharsList = new LinkedList<Character>();
-		new Thread(new Writer(chars, cb, this)).start();
-		new Thread(new Reader(cb, this)).start();
+		if(synchronous){
+			SyncCharacterBuffer scb = new SyncCharacterBuffer();
+			new Thread(new SyncWriter(chars, scb, this)).start();
+			new Thread(new SyncReader(scb, this)).start();			
+		}else{
+			CharacterBuffer cb = new CharacterBuffer();
+			new Thread(new Writer(chars, cb, this)).start();
+			new Thread(new Reader(cb, this)).start();			
+
+		}
 	}
 	
 	public void updateWriterLogger(String s){
@@ -49,7 +54,20 @@ public class Controller {
 		readerIsDone = true;
 		checkMatch();
 	}
-	
+	public String getTransmittedText(){
+		String s = "";
+		for(char c : chars){
+			s += c;
+		}
+		return s;
+	}
+	public String getReceivedText(){
+		String s = "";
+		for(char c : readCharsList){
+			s += c;
+		}
+		return s;
+	}
 	public void checkMatch(){
 		if(writerIsDone && readerIsDone){
 			boolean textIsMatching = true;
@@ -64,6 +82,8 @@ public class Controller {
 				}
 			}
 			guiFrame.setTextMatching(textIsMatching);
+			guiFrame.setTransmittedText(getTransmittedText());
+			guiFrame.setReceivedText(getReceivedText());
 		}
 	}
 }
