@@ -6,7 +6,7 @@ import entities.async.*;
 import entities.sync.*;
 import gui.GUIMutex;
 
-/**
+/**This class handles the comunication between the GUI and the reader and writer
  * @author Filip
  *
  */
@@ -17,16 +17,16 @@ public class Controller {
 	private boolean readerIsDone;
 	private LinkedList<Character> readCharsList;
 
-	/**
-	 * @param guiFrame
+	/**Contructs the controller for the specified GUI
+	 * @param guiFrame the specified GUI
 	 */
 	public Controller(GUIMutex guiFrame) {
 		this.guiFrame = guiFrame;
 	}
 	
-	/**
-	 * @param text
-	 * @param synchronous
+	/**Initializes the reader, writer and character buffer and starts the reader- and writer- threads.
+	 * @param text the text to transmit
+	 * @param synchronous specifies if the transimission should be synchronous or asynchronous
 	 */
 	public void startRW(String text, boolean synchronous){
 		this.chars = text.toCharArray();
@@ -43,29 +43,29 @@ public class Controller {
 		}
 	}
 	
-	/**
-	 * @param s
+	/**Updates the writer logger(text area) in the GUI with the specified String
+	 * @param s the specified String
 	 */
 	public void updateWriterLogger(String s){
 		guiFrame.updateWriterLogger(s);
 	}
 	
-	/**
-	 * @param s
+	/**Updates the reader logger(text area) in the GUI with the specified String
+	 * @param s the specified String
 	 */
 	public void updateReaderLogger(String s){
 		guiFrame.updateReaderLogger(s);
 	}
 	
-	/**
-	 * @param c
+	/**First stores the the read(received) char and then invokes the method updateReaderLogger
+	 * @param c the read char
 	 */
 	public void updateReader(char c){
 		readCharsList.add(new Character(c));
 		guiFrame.updateReaderLogger("Reading " + c);
 	}
 
-	/**
+	/**If the reader is done, this method checks if the transmitted text matches the received text
 	 * 
 	 */
 	public void setWriterDone() {
@@ -73,7 +73,7 @@ public class Controller {
 		checkMatch();
 	}
 	
-	/**
+	/**If the writer is done, this method checks if the transmitted text matches the received text
 	 * 
 	 */
 	public void setReaderDone(){
@@ -81,7 +81,7 @@ public class Controller {
 		checkMatch();
 	}
 	/**
-	 * @return
+	 * @return The string-representation of the transmitted text
 	 */
 	public String getTransmittedText(){
 		String s = "";
@@ -91,7 +91,7 @@ public class Controller {
 		return s;
 	}
 	/**
-	 * @return
+	 * @returnThe string-representation of the received text
 	 */
 	public String getReceivedText(){
 		String s = "";
@@ -101,7 +101,7 @@ public class Controller {
 		return s;
 	}
 	/**
-	 * 
+	 * Checks if there is a match and updates the GUI accordingly
 	 */
 	public void checkMatch(){
 		if(writerIsDone && readerIsDone){

@@ -6,7 +6,7 @@ import java.util.Random;
 
 import controller.Controller;
 
-/**
+/**A reader that reads from the CharacterBuffer
  * @author Filip
  *
  */
@@ -15,7 +15,7 @@ public class Reader implements Runnable{
 	private Controller controller;
 	private Random rand;
 
-	/**
+	/**Constructs a Reader with the specified CharacterBuffer and Controller
 	 * @param cb
 	 * @param controller
 	 */

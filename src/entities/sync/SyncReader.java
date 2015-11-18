@@ -6,7 +6,7 @@ import java.util.Random;
 
 import controller.Controller;
 
-/**
+/**A synchronized reader that reads the character buffer
  * @author Filip
  *
  */
@@ -15,7 +15,7 @@ public class SyncReader implements Runnable, Observer{
 	private Controller controller;
 	private Random rand;
 
-	/**
+	/**Constructs a Reader with the specified CharacterBuffer and Controller
 	 * @param cb
 	 * @param controller
 	 */
