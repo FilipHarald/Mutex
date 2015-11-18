@@ -147,14 +147,23 @@ public class GUIMutex
 		pnlTest.add(btnClear);
 	}
 
+	/**
+	 * @param s
+	 */
 	public void updateWriterLogger(String s) {
 		listW.append(s + "\n");
 	}
 
+	/**
+	 * @param s
+	 */
 	public void updateReaderLogger(String s) {
 		listR.append(s + "\n");
 	}
 
+	/**
+	 * @param textIsMatching
+	 */
 	public void setTextMatching(boolean textIsMatching) {
 		if(textIsMatching){
 			lblStatus.setText("It's a match!");
@@ -166,14 +175,23 @@ public class GUIMutex
 		btnClear.setEnabled(true);
 	}
 	
+	/**
+	 * @return
+	 */
 	public boolean syncIsSelected(){
 		return bSync.isSelected();
 	}
 	
+	/**
+	 * @param transmittedText
+	 */
 	public void setTransmittedText(String transmittedText) {
 		lblTrans.setText(transmittedText);
 	}
 	
+	/**
+	 * @param receivedText
+	 */
 	public void setReceivedText(String receivedText) {
 		lblRec.setText(receivedText);
 	}

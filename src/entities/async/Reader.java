@@ -6,11 +6,19 @@ import java.util.Random;
 
 import controller.Controller;
 
+/**
+ * @author Filip
+ *
+ */
 public class Reader implements Runnable{
 	private CharacterBuffer cb;
 	private Controller controller;
 	private Random rand;
 
+	/**
+	 * @param cb
+	 * @param controller
+	 */
 	public Reader(CharacterBuffer cb, Controller controller) {
 		this.cb = cb;
 		this.controller = controller;

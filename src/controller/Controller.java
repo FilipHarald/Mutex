@@ -6,6 +6,10 @@ import entities.async.*;
 import entities.sync.*;
 import gui.GUIMutex;
 
+/**
+ * @author Filip
+ *
+ */
 public class Controller {
 	private GUIMutex guiFrame;
 	private char[] chars;
@@ -13,10 +17,17 @@ public class Controller {
 	private boolean readerIsDone;
 	private LinkedList<Character> readCharsList;
 
+	/**
+	 * @param guiFrame
+	 */
 	public Controller(GUIMutex guiFrame) {
 		this.guiFrame = guiFrame;
 	}
 	
+	/**
+	 * @param text
+	 * @param synchronous
+	 */
 	public void startRW(String text, boolean synchronous){
 		this.chars = text.toCharArray();
 		readCharsList = new LinkedList<Character>();
@@ -32,28 +43,46 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * @param s
+	 */
 	public void updateWriterLogger(String s){
 		guiFrame.updateWriterLogger(s);
 	}
 	
+	/**
+	 * @param s
+	 */
 	public void updateReaderLogger(String s){
 		guiFrame.updateReaderLogger(s);
 	}
 	
+	/**
+	 * @param c
+	 */
 	public void updateReader(char c){
 		readCharsList.add(new Character(c));
 		guiFrame.updateReaderLogger("Reading " + c);
 	}
 
+	/**
+	 * 
+	 */
 	public void setWriterDone() {
 		writerIsDone = true;
 		checkMatch();
 	}
 	
+	/**
+	 * 
+	 */
 	public void setReaderDone(){
 		readerIsDone = true;
 		checkMatch();
 	}
+	/**
+	 * @return
+	 */
 	public String getTransmittedText(){
 		String s = "";
 		for(char c : chars){
@@ -61,6 +90,9 @@ public class Controller {
 		}
 		return s;
 	}
+	/**
+	 * @return
+	 */
 	public String getReceivedText(){
 		String s = "";
 		for(char c : readCharsList){
@@ -68,6 +100,9 @@ public class Controller {
 		}
 		return s;
 	}
+	/**
+	 * 
+	 */
 	public void checkMatch(){
 		if(writerIsDone && readerIsDone){
 			boolean textIsMatching = true;

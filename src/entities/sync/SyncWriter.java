@@ -6,12 +6,21 @@ import java.util.Random;
 
 import controller.Controller;
 
+/**
+ * @author Filip
+ *
+ */
 public class SyncWriter implements Runnable, Observer{
 	private char[] chars;
 	private SyncCharacterBuffer cb;
 	private Controller controller;
 	private Random rand;
 	
+	/**
+	 * @param chars
+	 * @param cb
+	 * @param controller
+	 */
 	public SyncWriter(char[] chars, SyncCharacterBuffer cb, Controller controller) {
 		this.chars = chars;
 		this.cb = cb;
@@ -20,6 +29,9 @@ public class SyncWriter implements Runnable, Observer{
 		rand = new Random();
 	}
 	
+	/**
+	 * 
+	 */
 	public void ifHasNotBeenRead(){
 		while(!cb.hasBeenRead()){
 			controller.updateWriterLogger("Trying to write. Data exists. Writer waits.");

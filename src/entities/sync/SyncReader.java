@@ -6,11 +6,19 @@ import java.util.Random;
 
 import controller.Controller;
 
+/**
+ * @author Filip
+ *
+ */
 public class SyncReader implements Runnable, Observer{
 	private SyncCharacterBuffer cb;
 	private Controller controller;
 	private Random rand;
 
+	/**
+	 * @param cb
+	 * @param controller
+	 */
 	public SyncReader(SyncCharacterBuffer cb, Controller controller) {
 		this.cb = cb;
 		cb.addObserver(this);
